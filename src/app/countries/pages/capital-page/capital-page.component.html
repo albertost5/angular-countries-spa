@@ -1,1 +1,23 @@
-<p>capital-page works!</p>
+<h2>By Capital</h2>
+<hr>
+
+<div class='row'>
+  <div class='col'>
+    <!-- SearchBox -->
+    <shared-search-box
+      [placeholder]="'Search by capital'"
+      (onValueSearch)='onValueSearchByCapital($event)'
+    ></shared-search-box>
+  </div>
+</div>
+
+<div class='row mt-4'>
+  <div class='col'>
+    <div *ngIf='capitals.length ===0; else table' class='alert alert-warning text-center'>
+      There is not data for the capital searched.
+    </div>
+    <ng-template #table>
+      <country-table [capitals]='capitals'></country-table>
+    </ng-template>
+  </div>
+</div>
