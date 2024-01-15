@@ -13,9 +13,25 @@ export class CountriesService {
   constructor(private readonly http: HttpClient) {
   }
 
-  searchCapital(capitalName: string): Observable<Country[]> {
+  searchByCapital(capitalName: string): Observable<Country[]> {
     const url = `${this.basePath}/capital/${capitalName}`;
-    
+
+    return this.http.get<Country[]>(url).pipe(
+      catchError(err => of([]))
+    );
+  }
+
+  searchByCountry(countryName: string): Observable<Country[]> {
+    const url = `${this.basePath}/name/${countryName}`;
+
+    return this.http.get<Country[]>(url).pipe(
+      catchError(err => of([]))
+    );
+  }
+
+  searchByRegion(regionName: string): Observable<Country[]> {
+    const url = `${this.basePath}/region/${regionName}`;
+
     return this.http.get<Country[]>(url).pipe(
       catchError(err => of([]))
     );

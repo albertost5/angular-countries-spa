@@ -1,1 +1,22 @@
-<p>region-page works!</p>
+<h2>By Region</h2>
+<hr>
+
+<div class='row'>
+  <div class='col'>
+    <shared-search-box
+      [placeholder]="'Search by region'"
+      (onValueSearch)='onValueSearchByRegion($event)'
+    ></shared-search-box>
+  </div>
+</div>
+
+<div class='row mt-4'>
+  <div class='col'>
+    <div *ngIf='regions.length ===0; else table' class='alert alert-warning text-center'>
+      There is not data for the region searched.
+    </div>
+    <ng-template #table>
+      <country-table [countries]='regions'></country-table>
+    </ng-template>
+  </div>
+</div>

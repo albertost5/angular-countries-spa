@@ -15,7 +15,7 @@ export class CapitalPageComponent {
   public capitals: Country[] = [];
 
   onValueSearchByCapital(searchTerm: string) {
-    this.countriesService.searchCapital(searchTerm)
+    this.countriesService.searchByCapital(searchTerm)
       .subscribe(capitals => this.capitals = capitals);
   }
 }

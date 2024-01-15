@@ -1,1 +1,22 @@
-<p>country-page works!</p>
+<h2>By Country</h2>
+<hr>
+
+<div class='row'>
+  <div class='col'>
+    <shared-search-box
+      [placeholder]="'Search by country'"
+      (onValueSearch)='onValueSearchByCountry($event)'
+    ></shared-search-box>
+  </div>
+</div>
+
+<div class='row mt-4'>
+  <div class='col'>
+    <div *ngIf='countries.length ===0; else table' class='alert alert-warning text-center'>
+      There is not data for the country searched.
+    </div>
+    <ng-template #table>
+      <country-table [countries]='countries'></country-table>
+    </ng-template>
+  </div>
+</div>
