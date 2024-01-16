@@ -9,6 +9,7 @@ import {CountryPageComponent} from './pages/country-page/country-page.component'
 import {CountryPageIdComponent} from './pages/country-page-id/country-page-id.component';
 import {RegionPageComponent} from './pages/region-page/region-page.component';
 import { CountryTableComponent } from './components/country-table/country-table.component';
+import {RouterLink} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CountryTableComponent } from './components/country-table/country-table.
   imports: [
     CommonModule,
     CountriesRoutingModule,
-    SharedModule
+    SharedModule,
+    RouterLink
   ],
 })
 export class CountriesModule {
