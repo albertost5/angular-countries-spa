@@ -1,21 +1,37 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Country} from '../../interfaces/country';
 import {CountriesService} from '../../services/countries.service';
+import {Subject, takeUntil} from 'rxjs';
+import {Region} from '../../interfaces/region.type';
 
 @Component({
   selector: 'countries-region-page',
   templateUrl: './region-page.component.html',
   styles: []
 })
-export class RegionPageComponent {
+export class RegionPageComponent implements  OnDestroy {
 
-  constructor(private readonly countriesService: CountriesService) {
+  public regionsAvailable: Region[] =  ['Europe', 'Americas', 'Africa', 'Asia', 'Oceania'];
+  public regions: Country[] = [];
+  public regionSelected?: Region;
+  private destroyed$: Subject<void> = new Subject<void>();
+
+  onValueSearchByRegion(region: Region) {
+    this.countriesService.searchByRegion(region)
+      .pipe(
+        takeUntil(this.destroyed$)
+      )
+      .subscribe(regions => {
+        this.regions = regions;
+        this.regionSelected = region;
+      });
   }
 
-  public regions: Country[] = [];
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
 
-  onValueSearchByRegion(searchTerm: string) {
-    this.countriesService.searchByRegion(searchTerm)
-      .subscribe(regions => this.regions = regions);
+  constructor(private readonly countriesService: CountriesService) {
   }
 }
