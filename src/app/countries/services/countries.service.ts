@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Country} from '../interfaces/country';
-import {catchError, map, Observable, of} from 'rxjs';
+import {catchError, delay, map, Observable, of} from 'rxjs';
 import {Region} from '../interfaces/region.type';
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,8 @@ export class CountriesService {
   searchByCapital(capitalName: string): Observable<Country[]> {
     const url = `${this.basePath}/capital/${capitalName}`;
 
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+      .pipe(delay(3000));
   }
 
   searchByCountry(countryName: string): Observable<Country[]> {

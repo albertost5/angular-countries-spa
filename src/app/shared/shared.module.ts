@@ -6,6 +6,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -14,13 +15,15 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
     AboutPageComponent,
     SidebarComponent,
     ContactPageComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    SpinnerComponent
   ],
   exports: [
     HomePageComponent,
     AboutPageComponent,
     SidebarComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
