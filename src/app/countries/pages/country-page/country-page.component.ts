@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountriesService} from '../../services/countries.service';
-import {Country} from '../../interfaces/country';
+import {Country} from '../../interfaces/country.interface';
 import {Subject, takeUntil} from 'rxjs';
 
 @Component({
@@ -8,10 +8,15 @@ import {Subject, takeUntil} from 'rxjs';
   templateUrl: './country-page.component.html',
   styles: []
 })
-export class CountryPageComponent implements OnDestroy {
+export class CountryPageComponent implements OnInit, OnDestroy {
 
+  public storeByCountryTerm: string = '';
   public countries: Country[] = [];
   private destroyed$: Subject<void> = new Subject<void>();
+  ngOnInit(): void {
+    this.storeByCountryTerm = this.countriesService.countriesStore.byCountry.term;
+    this.countries = this.countriesService.countriesStore.byCountry.countries;
+  }
 
   onValueSearchByCountry(searchTerm: string) {
     this.countriesService.searchByCountry(searchTerm)

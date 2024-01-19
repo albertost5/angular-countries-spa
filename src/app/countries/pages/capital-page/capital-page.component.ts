@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CountriesService} from '../../services/countries.service';
-import {Country} from '../../interfaces/country';
+import {Country} from '../../interfaces/country.interface';
 import {BehaviorSubject, Subject, takeUntil} from 'rxjs';
 
 @Component({
@@ -8,11 +8,17 @@ import {BehaviorSubject, Subject, takeUntil} from 'rxjs';
   templateUrl: './capital-page.component.html',
   styles: []
 })
-export class CapitalPageComponent implements OnDestroy {
+export class CapitalPageComponent implements OnInit, OnDestroy {
 
+  public storeByCapitalTerm: string = '';
   public capitals: Country[] = [];
   public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private destroyed$: Subject<void> = new Subject<void>();
+
+  ngOnInit(): void {
+    this.storeByCapitalTerm = this.countriesService.countriesStore.byCapital.term;
+    this.capitals = this.countriesService.countriesStore.byCapital.countries;
+  }
 
   onValueSearchByCapital(searchTerm: string) {
     this.isLoading$.next(true);

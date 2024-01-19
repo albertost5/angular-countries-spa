@@ -8,7 +8,10 @@ import {debounceTime, Subject} from 'rxjs';
 })
 export class SearchBoxComponent implements OnInit {
   @Input()
-  placeholder: string = 'Search..'
+  storeTerm: string = '';
+
+  @Input()
+  placeholder: string = 'Search..';
 
   @Output()
   onValueSearch: EventEmitter<string> = new EventEmitter<string>();
@@ -16,6 +19,7 @@ export class SearchBoxComponent implements OnInit {
   private term$: Subject<string> = new Subject<string>();
 
   ngOnInit(): void {
+    console.log('searchBox => ', this.storeTerm);
     this.term$
       .pipe(
         debounceTime(300)
