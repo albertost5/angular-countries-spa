@@ -2,6 +2,6 @@
   type='text'
   class='form-control'
   [placeholder]='placeholder'
-  (keyup.enter)='onEnter(searchInput.value)'
+  (keyup)='onKeyUp(searchInput.value)'
   #searchInput
 />

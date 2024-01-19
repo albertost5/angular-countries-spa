@@ -22,8 +22,7 @@ export class CountriesService {
   searchByCapital(capitalName: string): Observable<Country[]> {
     const url = `${this.basePath}/capital/${capitalName}`;
 
-    return this.getCountriesRequest(url)
-      .pipe(delay(3000));
+    return this.getCountriesRequest(url);
   }
 
   searchByCountry(countryName: string): Observable<Country[]> {

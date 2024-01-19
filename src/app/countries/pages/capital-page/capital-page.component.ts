@@ -30,6 +30,7 @@ export class CapitalPageComponent implements OnDestroy {
     this.destroyed$.next();
     this.destroyed$.complete();
   }
+
   constructor(private readonly countriesService: CountriesService) {
   }
 }
